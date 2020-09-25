@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="schultegrid" />
+    <version value="1" />
+    <list>
+        <mapping class="com.aokiji.schultegrid.db.entities.Record" />
+    </list>
+    <storage value="external" />
+</litepal>
