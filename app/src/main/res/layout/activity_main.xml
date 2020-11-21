@@ -55,15 +55,13 @@
             android:overScrollMode="never"
             android:scrollbars="none" />
 
-        <TextView
-            android:id="@+id/tv_mist"
+        <ImageView
+            android:id="@+id/iv_mist"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#B3000000"
+            android:background="@android:color/white"
             android:clickable="true"
-            android:gravity="center"
-            android:textSize="@dimen/sp_20"
-            android:textStyle="bold" />
+            android:scaleType="center" />
 
     </FrameLayout>
 

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.FrameLayout;
@@ -19,20 +20,21 @@ import com.aokiji.schultegrid.ui.widget.Toast;
 import com.aokiji.schultegrid.utils.DateUtil;
 import com.aokiji.schultegrid.utils.ScreenUtil;
 import com.aokiji.schultegrid.utils.SystemUtil;
+import com.bumptech.glide.Glide;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener
+{
 
     private static final String TAG = "MainActivity";
 
     private Chronometer tvTimer;
-    private TextView tvMist;
     private RecyclerView rvPanel;
-    private ImageView ivChart, ivStart;
+    private ImageView ivMist, ivChart, ivStart;
 
     private List<Integer> mList = new ArrayList<>();
     private ButtonAdapter mAdapter;
@@ -57,15 +59,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initView()
     {
         tvTimer = findViewById(R.id.tv_timer);
-        tvMist = findViewById(R.id.tv_mist);
         rvPanel = findViewById(R.id.rv_panel);
+        ivMist = findViewById(R.id.iv_mist);
         ivChart = findViewById(R.id.iv_chart);
         ivStart = findViewById(R.id.iv_start);
 
+        initRecyclerView();
+
         ivChart.setOnClickListener(this);
         ivStart.setOnClickListener(this);
-
-        initRecyclerView();
+        Glide.with(this).load(R.drawable.ic_mist).into(ivMist);
     }
 
 
@@ -79,7 +82,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         GridLayoutManager layoutManager = new GridLayoutManager(this, 5);
         rvPanel.setLayoutManager(layoutManager);
         mAdapter = new ButtonAdapter(this, mList);
-        mAdapter.setOnItemClickListener(new ButtonAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new ButtonAdapter.OnItemClickListener()
+        {
             @Override
             public void onItemClick(int position)
             {
@@ -100,11 +104,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         record.save();
                         // UI
                         tvTimer.stop();
-                        rvPanel.postDelayed(new Runnable() {
+                        rvPanel.postDelayed(new Runnable()
+                        {
                             @Override
                             public void run()
                             {
-                                tvMist.setVisibility(View.VISIBLE);
+                                ivMist.setVisibility(View.VISIBLE);
                                 initData();
                             }
                         }, 100);
@@ -116,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 else
                 {
+                    shock();
                     Toast.e(MainActivity.this, "喝多了?");
                 }
             }
@@ -139,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAdapter.notifyDataSetChanged();
     }
 
+
     @Override
     public void onClick(View v)
     {
@@ -150,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.iv_start:
                 // UI
-                tvMist.setVisibility(View.GONE);
+                ivMist.setVisibility(View.GONE);
                 tvTimer.setBase(SystemClock.elapsedRealtime());
                 tvTimer.start();
                 // 记录开始时间
@@ -162,4 +169,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
+
+    private void shock()
+    {
+        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        vibrator.vibrate(250);
+    }
+
 }
