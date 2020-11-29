@@ -2,5 +2,6 @@
     <string name="app_name">舒尔特方格</string>
 
     <string name="title_chart">统计</string>
+    <string name="text_times">共完成 %s 次</string>
 
 </resources>

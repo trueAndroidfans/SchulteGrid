@@ -11,6 +11,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.aokiji.schultegrid.db.entities.Record;
 import com.aokiji.schultegrid.ui.widget.MyMarkerView;
@@ -35,9 +36,11 @@ import org.litepal.LitePal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChartActivity extends AppCompatActivity implements OnChartValueSelectedListener {
+public class ChartActivity extends AppCompatActivity implements OnChartValueSelectedListener
+{
 
     private Toolbar toolbar;
+    private TextView tvTimes;
     private LineChart chart;
 
     private Typeface tfRegular;
@@ -49,6 +52,8 @@ public class ChartActivity extends AppCompatActivity implements OnChartValueSele
         setContentView(R.layout.activity_chart);
 
         initView();
+
+        initData();
 
         initTypeface();
 
@@ -63,7 +68,15 @@ public class ChartActivity extends AppCompatActivity implements OnChartValueSele
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        tvTimes = findViewById(R.id.tv_times);
         chart = findViewById(R.id.linechart);
+    }
+
+
+    private void initData()
+    {
+        int times = LitePal.findAll(Record.class).size();
+        tvTimes.setText(String.format(getString(R.string.text_times), times));
     }
 
 
@@ -150,7 +163,8 @@ public class ChartActivity extends AppCompatActivity implements OnChartValueSele
             set1.setValueTextSize(9f);
             set1.enableDashedHighlightLine(10f, 5f, 0f);
             set1.setDrawFilled(true);
-            set1.setFillFormatter(new IFillFormatter() {
+            set1.setFillFormatter(new IFillFormatter()
+            {
                 @Override
                 public float getFillLinePosition(ILineDataSet dataSet, LineDataProvider dataProvider)
                 {

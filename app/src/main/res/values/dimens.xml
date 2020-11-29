@@ -5,6 +5,7 @@
     <dimen name="dp_10">10dp</dimen>
     <dimen name="dp_12">12dp</dimen>
     <dimen name="dp_50">50dp</dimen>
+    <dimen name="dp_72">72dp</dimen>
 
     <dimen name="sp_16">16sp</dimen>
     <dimen name="sp_20">20sp</dimen>

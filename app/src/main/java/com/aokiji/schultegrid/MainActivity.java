@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Chronometer;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.aokiji.schultegrid.db.entities.Record;
 import com.aokiji.schultegrid.ui.adapter.ButtonAdapter;
@@ -21,6 +20,8 @@ import com.aokiji.schultegrid.utils.DateUtil;
 import com.aokiji.schultegrid.utils.ScreenUtil;
 import com.aokiji.schultegrid.utils.SystemUtil;
 import com.bumptech.glide.Glide;
+
+import org.litepal.LitePal;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

@@ -13,6 +13,17 @@
         android:theme="@style/ThemeOverlay.MaterialComponents.Dark"
         app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light" />
 
+    <TextView
+        android:id="@+id/tv_times"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:background="@android:color/black"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_72"
+        android:text="@string/text_times"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/sp_16" />
+
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/linechart"
         android:layout_width="match_parent"
