@@ -62,7 +62,5 @@
             android:background="@android:color/white"
             android:clickable="true"
             android:scaleType="center" />
-
     </FrameLayout>
-
 </RelativeLayout>

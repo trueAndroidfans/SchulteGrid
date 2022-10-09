@@ -1,24 +1,21 @@
 package com.aokiji.schultegrid;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import com.aokiji.schultegrid.db.entities.Record;
 import com.aokiji.schultegrid.ui.widget.MyMarkerView;
-import com.aokiji.schultegrid.ui.widget.Toast;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -36,11 +33,9 @@ import org.litepal.LitePal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChartActivity extends AppCompatActivity implements OnChartValueSelectedListener
-{
+public class ChartActivity extends AppCompatActivity implements OnChartValueSelectedListener {
 
     private Toolbar toolbar;
-    private TextView tvTimes;
     private LineChart chart;
 
     private Typeface tfRegular;
@@ -50,13 +45,8 @@ public class ChartActivity extends AppCompatActivity implements OnChartValueSele
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart);
-
         initView();
-
-        initData();
-
         initTypeface();
-
         setChartStyle();
     }
 
@@ -67,16 +57,7 @@ public class ChartActivity extends AppCompatActivity implements OnChartValueSele
         toolbar.setTitle(getString(R.string.title_chart));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        tvTimes = findViewById(R.id.tv_times);
         chart = findViewById(R.id.linechart);
-    }
-
-
-    private void initData()
-    {
-        int times = LitePal.findAll(Record.class).size();
-        tvTimes.setText(String.format(getString(R.string.text_times), times));
     }
 
 
@@ -118,11 +99,9 @@ public class ChartActivity extends AppCompatActivity implements OnChartValueSele
             yAxis.setAxisMaximum(2 * 60f);
             yAxis.setAxisMinimum(0f);
         }
-        List<Record> records = LitePal.findAll(Record.class);
+        List<Record> records = LitePal.limit(6).find(Record.class);
         setData(records);
-
         chart.animateX(1500);
-
         Legend l = chart.getLegend();
         l.setForm(Legend.LegendForm.LINE);
     }
@@ -131,24 +110,18 @@ public class ChartActivity extends AppCompatActivity implements OnChartValueSele
     private void setData(List<Record> records)
     {
         ArrayList<Entry> values = new ArrayList<>();
-        for (int i = 0; i < records.size(); i++)
-        {
+        for (int i = 0; i < records.size(); i++) {
             float val = Float.valueOf(records.get(i).getTimeConsuming());
             values.add(new Entry(i, val, ContextCompat.getDrawable(this, R.drawable.star)));
         }
-
         LineDataSet set1;
-
-        if (chart.getData() != null && chart.getData().getDataSetCount() > 0)
-        {
+        if (chart.getData() != null && chart.getData().getDataSetCount() > 0) {
             set1 = (LineDataSet) chart.getData().getDataSetByIndex(0);
             set1.setValues(values);
             set1.notifyDataSetChanged();
             chart.getData().notifyDataChanged();
             chart.notifyDataSetChanged();
-        }
-        else
-        {
+        } else {
             set1 = new LineDataSet(values, "耗时");
             set1.setDrawIcons(false);
             set1.enableDashedLine(10f, 5f, 0f);
@@ -163,21 +136,17 @@ public class ChartActivity extends AppCompatActivity implements OnChartValueSele
             set1.setValueTextSize(9f);
             set1.enableDashedHighlightLine(10f, 5f, 0f);
             set1.setDrawFilled(true);
-            set1.setFillFormatter(new IFillFormatter()
-            {
+            set1.setFillFormatter(new IFillFormatter() {
                 @Override
                 public float getFillLinePosition(ILineDataSet dataSet, LineDataProvider dataProvider)
                 {
                     return chart.getAxisLeft().getAxisMinimum();
                 }
             });
-            if (Utils.getSDKInt() >= 18)
-            {
+            if (Utils.getSDKInt() >= 18) {
                 Drawable drawable = ContextCompat.getDrawable(this, R.drawable.fade_red);
                 set1.setFillDrawable(drawable);
-            }
-            else
-            {
+            } else {
                 set1.setFillColor(Color.BLACK);
             }
             ArrayList<ILineDataSet> dataSets = new ArrayList<>();
@@ -191,8 +160,7 @@ public class ChartActivity extends AppCompatActivity implements OnChartValueSele
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item)
     {
-        if (android.R.id.home == item.getItemId())
-        {
+        if (android.R.id.home == item.getItemId()) {
             finish();
             return true;
         }
