@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
@@ -15,36 +16,37 @@
         android:textSize="@dimen/sp_20"
         android:textStyle="bold" />
 
-    <ImageView
-        android:id="@+id/iv_chart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="@dimen/dp_10"
-        android:layout_marginBottom="@dimen/dp_50"
-        android:background="@drawable/selector_item_background"
-        android:clickable="true"
-        android:padding="@dimen/dp_6"
-        android:src="@drawable/ic_chart" />
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_100"
+        android:layout_alignParentBottom="true">
 
-    <ImageView
-        android:id="@+id/iv_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginRight="@dimen/dp_10"
-        android:layout_marginBottom="@dimen/dp_50"
-        android:background="@drawable/selector_item_background"
-        android:clickable="true"
-        android:padding="@dimen/dp_6"
-        android:src="@drawable/ic_gun" />
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:backgroundTint="@android:color/white"
+            app:fabAlignmentMode="end"
+            app:fabCradleMargin="@dimen/dp_8"
+            app:fabCradleRoundedCornerRadius="@dimen/dp_30" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/white"
+            android:clickable="true"
+            android:src="@drawable/ic_gun"
+            app:layout_anchor="@id/bottomAppBar"
+            app:rippleColor="@color/color_2c" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/iv_chart"
+        android:layout_above="@id/coordinatorLayout"
         android:layout_margin="@dimen/dp_10">
 
         <androidx.recyclerview.widget.RecyclerView

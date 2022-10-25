@@ -13,8 +13,28 @@
         android:theme="@style/ThemeOverlay.MaterialComponents.Dark"
         app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light" />
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/linechart"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="@dimen/dp_0"
+        android:layout_margin="@dimen/dp_10"
+        android:layout_weight="1"
+        android:translationZ="@dimen/dp_3"
+        app:cardCornerRadius="@dimen/dp_3"
+        app:cardElevation="@dimen/dp_3">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/linechart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        android:layout_margin="@dimen/dp_10"
+        android:layout_weight="1"
+        app:cardCornerRadius="@dimen/dp_3"
+        app:cardElevation="@dimen/dp_3">
+
+    </androidx.cardview.widget.CardView>
 </LinearLayout>

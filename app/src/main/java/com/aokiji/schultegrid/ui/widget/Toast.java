@@ -30,8 +30,7 @@ public class Toast {
         TextView tvText = view.findViewById(R.id.tv_text);
         tvText.setText(text);
         toast.setView(view);
-        toast.setGravity(Gravity.BOTTOM, 0, 15);
-
+        toast.setGravity(Gravity.BOTTOM, 0, 138);
         return toast;
     }
 

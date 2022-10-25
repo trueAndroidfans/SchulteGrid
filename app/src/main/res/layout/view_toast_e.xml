@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/tv_text"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
-        android:layout_margin="@dimen/dp_12"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_40"
+        android:layout_margin="@dimen/dp_10"
         android:background="@drawable/shape_toast_background"
         android:gravity="center"
+        android:paddingLeft="@dimen/dp_30"
+        android:paddingRight="@dimen/dp_50"
         android:text="error"
         android:textColor="@android:color/black"
         android:textSize="@dimen/sp_16"
@@ -18,8 +20,6 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/dp_50"
+        android:layout_alignEnd="@id/tv_text"
         android:src="@drawable/ic_dice" />
-
 </RelativeLayout>

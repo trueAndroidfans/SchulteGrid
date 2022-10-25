@@ -7,12 +7,14 @@ import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.os.Vibrator;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,19 +25,23 @@ import com.aokiji.schultegrid.utils.DateUtil;
 import com.aokiji.schultegrid.utils.ScreenUtil;
 import com.aokiji.schultegrid.utils.SystemUtil;
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
     private Chronometer tvTimer;
     private RecyclerView rvPanel;
-    private ImageView ivMist, ivChart, ivStart;
+    private ImageView ivMist;
+    private BottomAppBar bottomAppBar;
+    private FloatingActionButton fabStart;
 
     private List<Integer> mList = new ArrayList<>();
     private ButtonAdapter mAdapter;
@@ -60,11 +66,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvTimer = findViewById(R.id.tv_timer);
         rvPanel = findViewById(R.id.rv_panel);
         ivMist = findViewById(R.id.iv_mist);
-        ivChart = findViewById(R.id.iv_chart);
-        ivStart = findViewById(R.id.iv_start);
+        bottomAppBar = findViewById(R.id.bottomAppBar);
+        fabStart = findViewById(R.id.fabStart);
         initRecyclerView();
-        ivChart.setOnClickListener(this);
-        ivStart.setOnClickListener(this);
+        initBottomAppBar();
+        fabStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                start();
+            }
+        });
         Glide.with(this).load(R.drawable.ic_mist).into(ivMist);
     }
 
@@ -119,6 +131,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    private void initBottomAppBar()
+    {
+        bottomAppBar.replaceMenu(R.menu.menu_main);
+        bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item)
+            {
+                switch (item.getItemId()) {
+                    case R.id.action_statistics:
+                        Intent intent = new Intent(MainActivity.this, ChartActivity.class);
+                        startActivity(intent);
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
+    }
+
+
     private void initData()
     {
         mList.clear();
@@ -133,28 +165,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    @Override
-    public void onClick(View v)
+    private void start()
     {
-        switch (v.getId()) {
-            case R.id.iv_chart:
-                Intent intent = new Intent(MainActivity.this, ChartActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.iv_start:
-                // UI
-                ivMist.setVisibility(View.GONE);
-                alert(R.raw.a3);
-                tvTimer.setBase(SystemClock.elapsedRealtime());
-                tvTimer.start();
-                // 记录开始时间
-                mStartTimeMills = System.currentTimeMillis();
-                // 重置
-                mSmallGoal = 1;
-                break;
-            default:
-                break;
-        }
+        // UI
+        ivMist.setVisibility(View.GONE);
+        alert(R.raw.a3);
+        tvTimer.setBase(SystemClock.elapsedRealtime());
+        tvTimer.start();
+        // 记录开始时间
+        mStartTimeMills = System.currentTimeMillis();
+        // 重置
+        mSmallGoal = 1;
     }
 
 
