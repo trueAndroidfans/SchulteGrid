@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                         // 保存记录
                         Record record = new Record();
                         record.setTimeConsuming(timeConsuming);
-                        record.setCreateTime(DateUtil.convertDateToString(System.currentTimeMillis()));
+                        record.setCreateTime(System.currentTimeMillis());
                         record.setCreator(SystemUtil.getDeviceBrand());
                         record.save();
                         // UI

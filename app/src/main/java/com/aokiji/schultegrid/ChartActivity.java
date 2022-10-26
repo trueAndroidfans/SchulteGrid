@@ -31,6 +31,7 @@ import com.github.mikephil.charting.utils.Utils;
 import org.litepal.LitePal;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ChartActivity extends AppCompatActivity implements OnChartValueSelectedListener {
@@ -99,7 +100,8 @@ public class ChartActivity extends AppCompatActivity implements OnChartValueSele
             yAxis.setAxisMaximum(2 * 60f);
             yAxis.setAxisMinimum(0f);
         }
-        List<Record> records = LitePal.limit(6).find(Record.class);
+        List<Record> records = LitePal.order("createTime desc").limit(6).find(Record.class);
+        Collections.reverse(records);
         setData(records);
         chart.animateX(1500);
         Legend l = chart.getLegend();

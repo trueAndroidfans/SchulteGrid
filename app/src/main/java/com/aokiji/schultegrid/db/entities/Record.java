@@ -12,7 +12,7 @@ public class Record extends LitePalSupport {
     /**
      * 创建时间
      */
-    private String createTime;
+    private long createTime;
 
     /**
      * 创建人
@@ -29,12 +29,12 @@ public class Record extends LitePalSupport {
         this.timeConsuming = timeConsuming;
     }
 
-    public String getCreateTime()
+    public long getCreateTime()
     {
         return createTime;
     }
 
-    public void setCreateTime(String createTime)
+    public void setCreateTime(long createTime)
     {
         this.createTime = createTime;
     }
