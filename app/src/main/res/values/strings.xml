@@ -3,5 +3,6 @@
 
     <string name="title_chart">统计</string>
     <string name="text_times">共完成 %s 次</string>
+    <string name="title_setting">设置</string>
 
 </resources>

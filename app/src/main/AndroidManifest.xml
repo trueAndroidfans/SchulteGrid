@@ -15,10 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".SettingActivity"
+            android:configChanges="orientation|keyboardHidden|screenLayout"
+            android:screenOrientation="portrait"
+            android:theme="@style/BlackStatusBarTheme" />
+        <activity
             android:name=".ChartActivity"
             android:configChanges="orientation|keyboardHidden|screenLayout"
             android:screenOrientation="portrait"
-            android:theme="@style/BlackStatusBarTheme"></activity>
+            android:theme="@style/BlackStatusBarTheme" />
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|screenLayout"

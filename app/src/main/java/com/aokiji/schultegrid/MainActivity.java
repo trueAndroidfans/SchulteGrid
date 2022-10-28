@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aokiji.schultegrid.db.entities.Record;
+import com.aokiji.schultegrid.db.entities.Times;
 import com.aokiji.schultegrid.ui.adapter.ButtonAdapter;
 import com.aokiji.schultegrid.ui.widget.Toast;
 import com.aokiji.schultegrid.utils.DateUtil;
@@ -107,7 +108,13 @@ public class MainActivity extends AppCompatActivity {
                         record.setCreateTime(System.currentTimeMillis());
                         record.setCreator(SystemUtil.getDeviceBrand());
                         record.save();
+                        Times times = new Times();
+                        times.setTimes(1);
+                        times.setCompletionTime(DateUtil.date2String(System.currentTimeMillis()));
+                        times.setCreator(SystemUtil.getDeviceBrand());
+                        times.save();
                         // UI
+                        alert(R.raw.a5);
                         tvTimer.stop();
                         rvPanel.postDelayed(new Runnable() {
                             @Override
@@ -121,9 +128,9 @@ public class MainActivity extends AppCompatActivity {
                         mSmallGoal = mSmallGoal + 1;
                     }
                 } else {
-                    shock();
                     alert(R.raw.a4);
-                    Toast.e(MainActivity.this, "喝多了?");
+                    shock();
+                    Toast.e(MainActivity.this, "走神啦?");
                 }
             }
         });
@@ -140,8 +147,12 @@ public class MainActivity extends AppCompatActivity {
             {
                 switch (item.getItemId()) {
                     case R.id.action_statistics:
-                        Intent intent = new Intent(MainActivity.this, ChartActivity.class);
-                        startActivity(intent);
+                        Intent statistics = new Intent(MainActivity.this, ChartActivity.class);
+                        startActivity(statistics);
+                        return true;
+                    case R.id.action_setting:
+                        Intent setting = new Intent(MainActivity.this, SettingActivity.class);
+                        startActivity(setting);
                         return true;
                     default:
                         return false;
@@ -168,8 +179,8 @@ public class MainActivity extends AppCompatActivity {
     private void start()
     {
         // UI
-        ivMist.setVisibility(View.GONE);
         alert(R.raw.a3);
+        ivMist.setVisibility(View.GONE);
         tvTimer.setBase(SystemClock.elapsedRealtime());
         tvTimer.start();
         // 记录开始时间
