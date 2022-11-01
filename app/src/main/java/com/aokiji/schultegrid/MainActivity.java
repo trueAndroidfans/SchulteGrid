@@ -109,8 +109,9 @@ public class MainActivity extends AppCompatActivity {
                         record.setCreator(SystemUtil.getDeviceBrand());
                         record.save();
                         Times times = new Times();
-                        times.setTimes(1);
+                        times.setCount(1);
                         times.setCompletionTime(DateUtil.date2String(System.currentTimeMillis()));
+                        times.setCreateTime(System.currentTimeMillis());
                         times.setCreator(SystemUtil.getDeviceBrand());
                         times.save();
                         // UI

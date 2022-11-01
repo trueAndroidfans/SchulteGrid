@@ -4,6 +4,7 @@
     <version value="1" />
     <list>
         <mapping class="com.aokiji.schultegrid.db.entities.Record" />
+        <mapping class="com.aokiji.schultegrid.db.entities.Times" />
     </list>
     <storage value="external" />
 </litepal>

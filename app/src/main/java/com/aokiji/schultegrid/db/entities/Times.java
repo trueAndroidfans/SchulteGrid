@@ -7,7 +7,7 @@ public class Times extends LitePalSupport {
     /**
      * 完成次数
      */
-    private int times;
+    private int count;
 
     /**
      * 完成时间
@@ -15,18 +15,23 @@ public class Times extends LitePalSupport {
     private String completionTime;
 
     /**
+     * 创建时间
+     */
+    private long createTime;
+
+    /**
      * 创建人
      */
     private String creator;
 
-    public int getTimes()
+    public int getCount()
     {
-        return times;
+        return count;
     }
 
-    public void setTimes(int times)
+    public void setCount(int count)
     {
-        this.times = times;
+        this.count = count;
     }
 
     public String getCompletionTime()
@@ -37,6 +42,16 @@ public class Times extends LitePalSupport {
     public void setCompletionTime(String completionTime)
     {
         this.completionTime = completionTime;
+    }
+
+    public long getCreateTime()
+    {
+        return createTime;
+    }
+
+    public void setCreateTime(long createTime)
+    {
+        this.createTime = createTime;
     }
 
     public String getCreator()
