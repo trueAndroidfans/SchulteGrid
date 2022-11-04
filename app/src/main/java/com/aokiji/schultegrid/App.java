@@ -2,6 +2,8 @@ package com.aokiji.schultegrid;
 
 import android.app.Application;
 
+import com.tencent.mmkv.MMKV;
+
 import org.litepal.LitePal;
 
 public class App extends Application {
@@ -11,5 +13,6 @@ public class App extends Application {
     {
         super.onCreate();
         LitePal.initialize(this);
+        MMKV.initialize(this);
     }
 }

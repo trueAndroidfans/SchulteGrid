@@ -6,5 +6,6 @@
     <string name="title_setting">设置</string>
     <string name="text_quiet_mode">静谧模式</string>
     <string name="text_quiet_mode_explain">关闭所有音效，震动</string>
+    <string name="text_view_on_github">查看仓库</string>
 
 </resources>

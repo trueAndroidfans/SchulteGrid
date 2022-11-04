@@ -28,6 +28,7 @@ import com.aokiji.schultegrid.utils.SystemUtil;
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.tencent.mmkv.MMKV;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
+    private static final String KEY_BE_QUIET = "KEY_BE_QUIET";
 
     private Chronometer tvTimer;
     private RecyclerView rvPanel;
@@ -95,8 +97,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(int position)
             {
-                if (mList.get(position) == mSmallGoal) {
-                    if (mList.get(position) == mFinalGoal) {
+                if (mList.get(position) == mSmallGoal)
+                {
+                    if (mList.get(position) == mFinalGoal)
+                    {
                         // 计算耗时
                         mEndTimeMills = System.currentTimeMillis();
                         BigDecimal endTime = new BigDecimal(mEndTimeMills);
@@ -115,7 +119,10 @@ public class MainActivity extends AppCompatActivity {
                         times.setCreator(SystemUtil.getDeviceBrand());
                         times.save();
                         // UI
-                        alert(R.raw.a5);
+                        if (!isQuietMode())
+                        {
+                            alert(R.raw.a5);
+                        }
                         tvTimer.stop();
                         rvPanel.postDelayed(new Runnable() {
                             @Override
@@ -125,12 +132,17 @@ public class MainActivity extends AppCompatActivity {
                                 initData();
                             }
                         }, 100);
-                    } else {
+                    } else
+                    {
                         mSmallGoal = mSmallGoal + 1;
                     }
-                } else {
-                    alert(R.raw.a4);
-                    shock();
+                } else
+                {
+                    if (!isQuietMode())
+                    {
+                        alert(R.raw.a4);
+                        shock();
+                    }
                     Toast.e(MainActivity.this, "走神啦?");
                 }
             }
@@ -146,7 +158,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item)
             {
-                switch (item.getItemId()) {
+                switch (item.getItemId())
+                {
                     case R.id.action_statistics:
                         Intent statistics = new Intent(MainActivity.this, ChartActivity.class);
                         startActivity(statistics);
@@ -167,9 +180,11 @@ public class MainActivity extends AppCompatActivity {
     {
         mList.clear();
         Random random = new Random();
-        while (mList.size() < 25) {
+        while (mList.size() < 25)
+        {
             int value = random.nextInt(25) + 1;
-            if (!mList.contains(value)) {
+            if (!mList.contains(value))
+            {
                 mList.add(value);
             }
         }
@@ -180,7 +195,10 @@ public class MainActivity extends AppCompatActivity {
     private void start()
     {
         // UI
-        alert(R.raw.a3);
+        if (!isQuietMode())
+        {
+            alert(R.raw.a3);
+        }
         ivMist.setVisibility(View.GONE);
         tvTimer.setBase(SystemClock.elapsedRealtime());
         tvTimer.start();
@@ -210,6 +228,13 @@ public class MainActivity extends AppCompatActivity {
                 mSoundPool.play(voiceId, 1, 1, 1, 0, 1);
             }
         });
+    }
+
+
+    private boolean isQuietMode()
+    {
+        String beQuietStr = MMKV.defaultMMKV().decodeString(KEY_BE_QUIET, "0");
+        return "1".equals(beQuietStr) ? true : false;
     }
 
 }
