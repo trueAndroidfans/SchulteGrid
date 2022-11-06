@@ -8,4 +8,5 @@
 + [LitePal](https://github.com/guolindev/LitePal)
 + [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart)
 + [Glide](https://github.com/bumptech/glide)
++ [MMKV](https://github.com/Tencent/MMKV)
 + [Iconfont](https://www.iconfont.cn/)
