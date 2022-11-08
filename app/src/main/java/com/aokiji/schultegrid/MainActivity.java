@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private static final String KEY_BE_QUIET = "KEY_BE_QUIET";
+    private static final String KEY_TOUCH = "KEY_TOUCH";
 
     private Chronometer tvTimer;
     private RecyclerView rvPanel;
@@ -136,12 +137,16 @@ public class MainActivity extends AppCompatActivity {
                     {
                         mSmallGoal = mSmallGoal + 1;
                     }
+                    if (isTouchMode())
+                    {
+                        shock(50);
+                    }
                 } else
                 {
                     if (!isQuietMode())
                     {
                         alert(R.raw.a4);
-                        shock();
+                        shock(500);
                     }
                     Toast.e(MainActivity.this, "走神啦?");
                 }
@@ -209,10 +214,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void shock()
+    private void shock(long milliseconds)
     {
         Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        vibrator.vibrate(250);
+        vibrator.vibrate(milliseconds);
     }
 
 
@@ -235,6 +240,13 @@ public class MainActivity extends AppCompatActivity {
     {
         String beQuietStr = MMKV.defaultMMKV().decodeString(KEY_BE_QUIET, "0");
         return "1".equals(beQuietStr) ? true : false;
+    }
+
+
+    private boolean isTouchMode()
+    {
+        String touchStr = MMKV.defaultMMKV().decodeString(KEY_TOUCH, "1");
+        return "1".equals(touchStr) ? true : false;
     }
 
 }

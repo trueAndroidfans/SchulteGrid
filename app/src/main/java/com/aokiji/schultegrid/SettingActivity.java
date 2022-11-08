@@ -18,9 +18,10 @@ import com.tencent.mmkv.MMKV;
 public class SettingActivity extends AppCompatActivity {
 
     private static final String KEY_BE_QUIET = "KEY_BE_QUIET";
+    private static final String KEY_TOUCH = "KEY_TOUCH";
 
     private Toolbar toolbar;
-    private Switch switchBeQuiet;
+    private Switch switchBeQuiet, switchTouch;
     private LinearLayout llViewOnGitHub;
 
     @Override
@@ -53,6 +54,20 @@ public class SettingActivity extends AppCompatActivity {
                 }
             }
         });
+        switchTouch = findViewById(R.id.switchTouch);
+        switchTouch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                if (isChecked)
+                {
+                    MMKV.defaultMMKV().encode(KEY_TOUCH, "1");
+                } else
+                {
+                    MMKV.defaultMMKV().encode(KEY_TOUCH, "0");
+                }
+            }
+        });
         llViewOnGitHub = findViewById(R.id.llViewOnGitHub);
         llViewOnGitHub.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +90,14 @@ public class SettingActivity extends AppCompatActivity {
         } else
         {
             switchBeQuiet.setChecked(false);
+        }
+        String touchStr = MMKV.defaultMMKV().decodeString(KEY_TOUCH, "1");
+        if ("1".equals(touchStr))
+        {
+            switchTouch.setChecked(true);
+        } else
+        {
+            switchTouch.setChecked(false);
         }
     }
 
