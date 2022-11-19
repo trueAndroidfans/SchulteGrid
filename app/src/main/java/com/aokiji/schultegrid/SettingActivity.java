@@ -1,5 +1,6 @@
 package com.aokiji.schultegrid;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,10 +11,15 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.aokiji.schultegrid.db.entities.Record;
+import com.aokiji.schultegrid.db.entities.Times;
 import com.tencent.mmkv.MMKV;
+
+import org.litepal.LitePal;
 
 public class SettingActivity extends AppCompatActivity {
 
@@ -22,7 +28,7 @@ public class SettingActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private Switch switchBeQuiet, switchTouch;
-    private LinearLayout llViewOnGitHub;
+    private LinearLayout llCleanData, llViewOnGitHub;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -68,6 +74,14 @@ public class SettingActivity extends AppCompatActivity {
                 }
             }
         });
+        llCleanData = findViewById(R.id.llCleanData);
+        llCleanData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                cleanData();
+            }
+        });
         llViewOnGitHub = findViewById(R.id.llViewOnGitHub);
         llViewOnGitHub.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +113,32 @@ public class SettingActivity extends AppCompatActivity {
         {
             switchTouch.setChecked(false);
         }
+    }
+
+
+    private void cleanData()
+    {
+        new AlertDialog.Builder(this)
+                .setTitle("警告")
+                .setMessage("确定删除所有记录吗?删除后不可恢复!")
+                .setNegativeButton("再想想", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        dialog.dismiss();
+                    }
+                })
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        dialog.dismiss();
+                        LitePal.deleteAll(Record.class);
+                        LitePal.deleteAll(Times.class);
+                    }
+                })
+                .setCancelable(false)
+                .show();
     }
 
 

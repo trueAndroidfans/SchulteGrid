@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.aokiji.schultegrid.db.entities.Record;
 import com.aokiji.schultegrid.db.entities.Times;
 import com.aokiji.schultegrid.ui.adapter.ButtonAdapter;
-import com.aokiji.schultegrid.ui.widget.Toast;
+import com.aokiji.schultegrid.ui.widget.ViewAnimator;
 import com.aokiji.schultegrid.utils.DateUtil;
 import com.aokiji.schultegrid.utils.ScreenUtil;
 import com.aokiji.schultegrid.utils.SystemUtil;
@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String KEY_TOUCH = "KEY_TOUCH";
 
     private Chronometer tvTimer;
+    private FrameLayout flPanel;
     private RecyclerView rvPanel;
     private ImageView ivMist;
     private BottomAppBar bottomAppBar;
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     private void initView()
     {
         tvTimer = findViewById(R.id.tv_timer);
+        flPanel = findViewById(R.id.flPanel);
         rvPanel = findViewById(R.id.rv_panel);
         ivMist = findViewById(R.id.iv_mist);
         bottomAppBar = findViewById(R.id.bottomAppBar);
@@ -148,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                         alert(R.raw.a4);
                         shock(500);
                     }
-                    Toast.e(MainActivity.this, "走神啦?");
+                    ViewAnimator.wobble(flPanel);
                 }
             }
         });

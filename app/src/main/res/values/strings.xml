@@ -9,5 +9,8 @@
     <string name="text_touch_mode">触摸反馈</string>
     <string name="text_touch_mode_explain">仅对数字按键有效</string>
     <string name="text_view_on_github">查看仓库</string>
+    <string name="text_error">走神啦?</string>
+    <string name="text_clean_data">清除记录</string>
+    <string name="text_clean_data_explain">删除所有游戏记录,请谨慎操作!</string>
 
 </resources>
