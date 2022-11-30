@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/text_quiet_mode"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="@dimen/sp_15" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -47,7 +47,7 @@
                 android:layout_marginTop="@dimen/dp_3"
                 android:text="@string/text_quiet_mode_explain"
                 android:textColor="@color/color_70"
-                android:textSize="@dimen/sp_15" />
+                android:textSize="@dimen/sp_14" />
         </LinearLayout>
 
         <Switch
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/text_touch_mode"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="@dimen/sp_15" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -90,7 +90,7 @@
                 android:layout_marginTop="@dimen/dp_3"
                 android:text="@string/text_touch_mode_explain"
                 android:textColor="@color/color_70"
-                android:textSize="@dimen/sp_15" />
+                android:textSize="@dimen/sp_14" />
         </LinearLayout>
 
         <Switch
@@ -127,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/text_clean_data"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="@dimen/sp_15" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -135,7 +135,7 @@
                 android:layout_marginTop="@dimen/dp_3"
                 android:text="@string/text_clean_data_explain"
                 android:textColor="@android:color/holo_red_dark"
-                android:textSize="@dimen/sp_15" />
+                android:textSize="@dimen/sp_14" />
         </LinearLayout>
     </LinearLayout>
 
@@ -159,6 +159,6 @@
             android:layout_marginLeft="@dimen/dp_20"
             android:text="@string/text_view_on_github"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/sp_16" />
+            android:textSize="@dimen/sp_15" />
     </LinearLayout>
 </LinearLayout>
